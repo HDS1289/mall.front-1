@@ -13,11 +13,14 @@ const GetTodo = ({todoNo}) => {
         done: false    
     })
     const [del, setDel] = useState(false)
+    const [refresh, setRefresh] = useState(false)
 
     useEffect(() => {
         console.log('GetTodo', 'useEffect')
-        getTodo(todoNo).then(todo => setTodo(todo))
-    }, [todoNo])
+        getTodo(todoNo).then(todo => {
+            setTodo(todo)
+            setRefresh(true)
+        })}, [todoNo, refresh])
 
     const onClickDel = useCallback(() => setDel(true), [])
     const deleteTodo = useCallback(() => {

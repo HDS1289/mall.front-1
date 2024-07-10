@@ -6,10 +6,13 @@ import Paging from '../Paging'
 const ListTodo = () => {
     const {toGet, toList, page, size} = useTo()
     const [response, setResponse] = useState(null)
+    const [refresh, setRefresh] = useState(false)
 
     useEffect(() => {
-        getTodos({page, size}).then(response => setResponse(response))
-    }, [page, size])
+        getTodos({page, size}).then(response => {
+            setResponse(response)
+            setRefresh(true)
+    })}, [page, refresh])
 
     return (
         <div className='border-2 border-blue-100 mr-2 ml-2'>
